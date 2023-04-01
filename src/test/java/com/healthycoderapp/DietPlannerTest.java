@@ -1,6 +1,7 @@
 package com.healthycoderapp;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +22,7 @@ class DietPlannerTest {
 	}
 	
 	@Test
-	void testCalculateDiet() {
+	void should_ReturnCorrectDietPlan_When_CorrectCoder() {
 
 		// given
 		Coder coder = new Coder(1.82, 75.0, 26, Gender.MALE);
