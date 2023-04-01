@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.RepeatedTest;
 
 class DietPlannerTest {
 
@@ -21,7 +21,7 @@ class DietPlannerTest {
 		System.out.println("A unit test was finished");
 	}
 	
-	@Test
+	@RepeatedTest(10)
 	void should_ReturnCorrectDietPlan_When_CorrectCoder() {
 
 		// given
