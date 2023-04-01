@@ -31,7 +31,7 @@ class BMICalculatorTest extends BMICalculator {
 	}
 	
 	@ParameterizedTest(name = "coder with weight of {0} and height of {1}")
-	@CsvFileSource(resources = "/diet-recommended-input-data.csv")
+	@CsvFileSource(resources = "/diet-recommended-input-data.csv", numLinesToSkip = 1)
 	void should_ReturnTrue_When_DietRecommended(Double coderWeight, Double coderHeight) {
 
 		// given
