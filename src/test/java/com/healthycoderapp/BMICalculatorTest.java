@@ -6,8 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTimeout;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +22,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 class BMICalculatorTest extends BMICalculator {
-
+	
+	String environment = "dev";
+	
 	@BeforeAll
 	static void beforeAll() {
 		System.out.println("Starting tests...");
@@ -90,6 +95,23 @@ class BMICalculatorTest extends BMICalculator {
 			() -> assertEquals(1.82, worstBMICoder.getHeight()),
 			() -> assertEquals(98.0, worstBMICoder.getWeight())
 		);
+	}
+
+	@Test
+	void should_ReturnCoderWithWorstBMIIn5ms_When_CoderListHas10000Elements() {
+
+		// given
+		assumeTrue(this.environment.equals("prod"));
+		List<Coder> coders = new ArrayList<>();
+		for (int i = 0; i <= 10000; i++) {
+			coders.add(new Coder(1.0 + i, 10.0 + i));
+		}
+
+		// when
+		Executable executable = () -> BMICalculator.findCoderWithWorstBMI(coders);
+
+		// then
+		assertTimeout(Duration.ofMillis(5), executable);
 	}
 
 	@Test
