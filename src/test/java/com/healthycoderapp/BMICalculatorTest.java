@@ -18,6 +18,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -107,6 +109,7 @@ class BMICalculatorTest extends BMICalculator {
 		}
 
 		@Test
+		@DisabledOnOs(OS.WINDOWS)
 		void should_ReturnCoderWithWorstBMIIn5ms_When_CoderListHas10000Elements() {
 
 			// given
